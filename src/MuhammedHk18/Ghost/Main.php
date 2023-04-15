@@ -109,6 +109,7 @@ class Main extends PluginBase{
             "Contents" => $player->getInventory()->getContents(),
             "Armors" => $player->getArmorInventory()->getContents(),
             "OffHand" => $player->getOffHandInventory()->getContents(),
+            "GameMode" => array_shift($player->getGamemode()->getAliases());
         ];
 
         $player->removeCurrentWindow(); // close inventory window
@@ -128,7 +129,7 @@ class Main extends PluginBase{
     public function turnOffGhost(Player|OfflinePlayer $player): void{
         $player->teleport(self::$ghostPlayers[$player->getName()]["Position"]);
 
-        $player->setGamemode(GameMode::SURVIVAL());
+        $player->setGamemode(GameMode::fromString(self::$ghostPlayers[$player->getName()]["GameMode"]));
 
         $player->getInventory()->setContents(self::$ghostPlayers[$player->getName()]["Contents"]);
         $player->getArmorInventory()->setContents(self::$ghostPlayers[$player->getName()]["Armors"]);
