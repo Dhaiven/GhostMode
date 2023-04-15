@@ -4,6 +4,7 @@ namespace Ghost;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\entity\EffectInstance;
 use pocketmine\OfflinePlayer;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
@@ -44,9 +45,16 @@ class Main extends PluginBase{
             #   run-in-game: §cPlease use this command in game
             #   turn-off-ghost: §5Ghost mode turned off
             #   turn-on-ghost: §5Ghost mode turned on
+            #   dont-have-permission: §cYou dont have permission run this command.
+            #   ghostlist-header-message: §5Players in ghost mode:
+            #   ghostlist-message: - {%0}
+
+            "dont-have-permission" => "§cYou dont have permission run this command.",
             "run-in-game" => "§cPlease use this command in game",
             "turn-off-ghost" => "§5Ghost mode turned off",
-            "turn-on-ghost" => "§5Ghost mode turned on"
+            "turn-on-ghost" => "§5Ghost mode turned on",
+            "ghostlist-header-message" => "§5Players in ghost mode:",
+            "ghostlist-message" => "- {%0}" # {0} = Player name
         ]);
         $this->config->save();
         $this->saveDefaultConfig();
@@ -65,11 +73,17 @@ class Main extends PluginBase{
 
     /**
      * @param string $configVar
-     * @return bool|mixed
+     * @param array $args
+     * @return array|bool|mixed|string|string[]
      */
 
-    public function getMessage(string $configVar){
+    public function getMessage(string $configVar, array $args = []){
         $message = $this->config->get($configVar) ?? throw new PluginException("please make sure you have set settings.yml properly.");
+
+        foreach($args as $index => $prop){
+            $message = str_replace("{%$index}", "", $prop);
+        }
+
         return $message;
     }
 
@@ -93,12 +107,17 @@ class Main extends PluginBase{
             "Position" => $player->getPosition(),
             "World" => $player->getWorld(),
             "Contents" => $player->getInventory()->getContents(),
-            "Armors" => $player->getArmorInventory()->getContents()
+            "Armors" => $player->getArmorInventory()->getContents(),
+            "OffHand" => $player->getOffHandInventory()->getContents(),
         ];
+
+        $player->removeCurrentWindow(); // close inventory window
         $player->getInventory()->clearAll(); // clear all inventory
         $player->getArmorInventory()->clearAll(); // clear armor inventory
+        $player->getOffHandInventory()->clearAll(); // off hand
 
-        $player->setGamemode(GameMode::fromString("spectator")); // spectator mode
+        $player->setGamemode(GameMode::SPECTATOR()); // spectator mode
+
     }
 
     /**
@@ -108,11 +127,23 @@ class Main extends PluginBase{
 
     public function turnOffGhost(Player|OfflinePlayer $player): void{
         $player->teleport(self::$ghostPlayers[$player->getName()]["Position"]);
-        $player->setGamemode(GameMode::fromString("survival"));
+
+        $player->setGamemode(GameMode::SURVIVAL());
+
         $player->getInventory()->setContents(self::$ghostPlayers[$player->getName()]["Contents"]);
         $player->getArmorInventory()->setContents(self::$ghostPlayers[$player->getName()]["Armors"]);
+        $player->getArmorInventory()->setContents(self::$ghostPlayers[$player->getName()]["OffHand"]);
+
         unset(self::$ghostPlayers[$player->getName()]);
     }
+
+    /**
+     * @param CommandSender $sender
+     * @param Command $command
+     * @param string $label
+     * @param array $args
+     * @return bool
+     */
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
     {
@@ -129,6 +160,19 @@ class Main extends PluginBase{
             }else{
                 $this->turnOnGhost($sender);
                 $sender->sendMessage($this->getMessage("turn-on-ghost"));
+            }
+        }
+
+        if($command == "ghostlist"){
+            if(!$sender->hasPermission("ghostlist.command")){
+                $sender->sendMessage($this->getMessage("dont-have-permission"));
+                return false;
+            }
+
+            $sender->sendMessage($this->getMessage("ghostlist-header-message"));
+
+            foreach (self::$ghostPlayers as $players => $index) {
+                $sender->sendMessage($this->getMessage("ghostlist-message", [0 => $players]));
             }
         }
 

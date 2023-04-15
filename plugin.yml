@@ -8,8 +8,14 @@ commands:
   ghost:
     permission: ghost.permission
     description: enter ghost mode
+  ghostlist:
+    description: see all ghost players
+    permission: ghostlist.command
 
 permissions:
   ghost.permission:
     description: ghost mode all permission
     default: true
+  ghostlist.command:
+    description: ghost list permission
+    default: op
