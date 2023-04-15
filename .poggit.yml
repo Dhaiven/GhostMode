@@ -2,7 +2,9 @@
 build-by-default: true
 branches:
 - main
+- PM4
 projects:
   GhostMode:
     path: ""
+    icon: icon.png
 ...
