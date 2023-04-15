@@ -103,7 +103,6 @@ class Main extends PluginBase{
      */
 
     public function turnOnGhost(Player $player): void{
-        var_dump($player->getGamemode());
         self::$ghostPlayers[$player->getName()] = [
             "Position" => $player->getPosition(),
             "World" => $player->getWorld(),
