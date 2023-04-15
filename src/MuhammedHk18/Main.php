@@ -109,7 +109,7 @@ class Main extends PluginBase{
             "Contents" => $player->getInventory()->getContents(),
             "Armors" => $player->getArmorInventory()->getContents(),
             "OffHand" => $player->getOffHandInventory()->getContents(),
-            "GameMode" => array_shift($player->getGamemode()->getAliases());
+            "GameMode" => array_shift($player->getGamemode()->getAliases()),
         ];
 
         $player->removeCurrentWindow(); // close inventory window
