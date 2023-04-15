@@ -1,0 +1,15 @@
+name: Ghost
+version: 1.0
+api: 4.0.0
+main: Ghost\Main
+author: MuhammedHk18
+
+commands:
+  ghost:
+    permission: ghost.permission
+    description: enter ghost mode
+
+permissions:
+  ghost.permission:
+    description: ghost mode all permission
+    default: true

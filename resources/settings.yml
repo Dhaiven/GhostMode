@@ -1,0 +1,10 @@
+# Use the § symbol for color coding
+# Color code list https://minecraft.tools/en/color-code.php
+# Default Config:
+#   run-in-game: §cPlease use this command in game
+#   turn-off-ghost: §5Ghost mode turned off
+#   turn-on-ghost: §5Ghost mode turned on
+
+run-in-game: "§cPlease use this command in game"
+turn-off-ghost: "§5Ghost mode turned off"
+turn-on-ghost: "§5Ghost mode turned on"
