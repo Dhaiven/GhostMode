@@ -4,7 +4,7 @@ namespace MuhammedHk18;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerQuitEvent;
-use Ghost\Main;
+use MuhammedHk18\Main;
 
 class EventListener implements Listener
 {

@@ -5,7 +5,7 @@ namespace MuhammedHk18;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\entity\EffectInstance;
-use pocketmine\OfflinePlayer;
+use pocketmine\player\OfflinePlayer;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\plugin\PluginException;
