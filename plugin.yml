@@ -1,7 +1,7 @@
 name: Ghost
 version: 1.0
 api: 4.0.0
-main: MuhammedHk18\Main
+main: MuhammedHk18\Ghost\Main
 author: MuhammedHk18
 
 commands:
@@ -10,12 +10,12 @@ commands:
     description: enter ghost mode
   ghostlist:
     description: see all ghost players
-    permission: ghostlist.command
+    permission: ghost.listcommand
 
 permissions:
   ghost.permission:
     description: ghost mode all permission
     default: true
-  ghostlist.command:
+  ghost.listcommand:
     description: ghost list permission
     default: op

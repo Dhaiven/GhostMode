@@ -1,16 +1,16 @@
 <?php
 
-namespace MuhammedHk18;
+namespace MuhammedHk18\Ghost;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\entity\EffectInstance;
+use pocketmine\player\GameMode;
 use pocketmine\player\OfflinePlayer;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\plugin\PluginException;
 use pocketmine\utils\Config;
-use pocketmine\player\GameMode;
+use MuhammedHk18\Ghost\EventListener;
 
 class Main extends PluginBase{
 
@@ -164,7 +164,7 @@ class Main extends PluginBase{
         }
 
         if($command == "ghostlist"){
-            if(!$sender->hasPermission("ghostlist.command")){
+            if(!$sender->hasPermission("ghost.listcommand")){
                 $sender->sendMessage($this->getMessage("dont-have-permission"));
                 return false;
             }

@@ -1,10 +1,10 @@
 <?php
 
-namespace MuhammedHk18;
+namespace MuhammedHk18\Ghost;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerQuitEvent;
-use MuhammedHk18\Main;
+use MuhammedHk18\Ghost\Main;
 
 class EventListener implements Listener
 {
