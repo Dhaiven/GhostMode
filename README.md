@@ -1,6 +1,8 @@
 # GhostMode
 [![](https://poggit.pmmp.io/shield.state/Ghost)](https://poggit.pmmp.io/p/Ghost)
 <a href="https://poggit.pmmp.io/p/Ghost"><img src="https://poggit.pmmp.io/shield.state/Ghost"></a>
+[![](https://poggit.pmmp.io/shield.api/Ghost)](https://poggit.pmmp.io/p/Ghost)
+<a href="https://poggit.pmmp.io/p/Ghost"><img src="https://poggit.pmmp.io/shield.api/Ghost"></a>
 
 Ghost mode for PocketMine 4 
 
