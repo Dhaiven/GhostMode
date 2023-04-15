@@ -1,6 +1,6 @@
 <?php
 
-namespace Ghost;
+namespace MuhammedHk18;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;

@@ -1,7 +1,7 @@
 name: Ghost
 version: 1.0
 api: 4.0.0
-main: Ghost\Main
+main: MuhammedHk18\Main
 author: MuhammedHk18
 
 commands:
